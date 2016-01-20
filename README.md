@@ -29,7 +29,8 @@ composer install --prefer-dist --no-dev
 
 * `api:list` :: list all registered apis
 * `api:add <name> <request_host> <request_path> <upstream_url>` :: add a new api
-* `api:delete <name or id>` :: delete api
+* `api:delete <name or id>` :: delete and api
+* `api:update <name or id> [--name [NAME]] [--request_host [REQUEST_HOST]] [--request_path [REQUEST_PATH]] [--upstream_url [UPSTREAM_URL]] [--strip_request_path] [--preserve_host]` :: update and api
 
 ## License
 
