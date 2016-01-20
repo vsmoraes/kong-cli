@@ -1,0 +1,22 @@
+{
+    "name": "dafiti/kong-cli",
+    "description": "Kong API Manager command line client written in PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vinicius Moraes",
+            "email": "vinicius.sabino@dafiti.com.br"
+        }
+    ],
+    "require": {
+        "symfony/console": "^3.0",
+        "php-di/php-di": "^5.2",
+        "symfony/yaml": "^3.0",
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dafiti\\Kong\\": "src"
+        }
+    }
+}

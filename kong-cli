@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+use Dafiti\Kong\Application;
+use Symfony\Component\Console\Application as ConsoleApplication;
+use DI\ContainerBuilder;
+
+set_time_limit(0);
+
+define('ROOT_PATH', __DIR__);
+define('APP_PATH', ROOT_PATH . '/src/');
+define('CONFIG_PATH', ROOT_PATH . '/config/');
+
+$loader = require ROOT_PATH . '/vendor/autoload.php';
+
+$builder = new ContainerBuilder();
+$builder->useAnnotations(false);
+$container = $builder->build();
+
+$app = new Application($container, new ConsoleApplication());
+$app->run();
