@@ -3,10 +3,14 @@ namespace Dafiti\Kong;
 
 use Interop\Container\ContainerInterface;
 use Symfony\Component\Console\Application as console;
-use Symfony\Component\Yaml\Yaml;
 
 class Application
 {
+    /**
+     * @var Application
+     */
+    protected static $instance;
+
     /**
      * @var ContainerInterface
      */
@@ -22,24 +26,28 @@ class Application
      */
     protected $config = [];
 
-    public function __construct(ContainerInterface $container, Console $console)
+    private function __construct(ContainerInterface $container, Console $console)
     {
         $this->container = $container;
         $this->console = $console;
     }
 
     /**
-     * @param string $filename
+     * @param ContainerInterface|null $container
+     * @param console|null $console
+     * @return Application
      */
-    protected function loadConfig($filename = 'app.yml')
-    {
-        if (!empty($this->config)) {
-            return;
+    public static function getInstance(
+        ContainerInterface $container = null,
+        Console $console = null,
+        array $config = []
+    ) {
+        if (!static::$instance) {
+            static::$instance = new static($container, $console);
+            static::$instance->setConfig($config);
         }
 
-        $config = Yaml::parse(file_get_contents(CONFIG_PATH . $filename));
-
-        $this->setConfig($config);
+        return static::$instance;
     }
 
     /**
@@ -68,7 +76,6 @@ class Application
      */
     public function run()
     {
-        $this->loadConfig();
         $commands = $this->config('commands');
 
         foreach ($commands as $command) {

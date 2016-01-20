@@ -3,6 +3,7 @@
 
 use Dafiti\Kong\Application;
 use Symfony\Component\Console\Application as ConsoleApplication;
+use Symfony\Component\Yaml\Yaml;
 use DI\ContainerBuilder;
 
 set_time_limit(0);
@@ -13,9 +14,12 @@ define('CONFIG_PATH', ROOT_PATH . '/config/');
 
 $loader = require ROOT_PATH . '/vendor/autoload.php';
 
+$config = Yaml::parse(file_get_contents(CONFIG_PATH . 'app.yml'));
+
 $builder = new ContainerBuilder();
+$builder->addDefinitions(CONFIG_PATH . 'dependency-injection.php');
 $builder->useAnnotations(false);
 $container = $builder->build();
 
-$app = new Application($container, new ConsoleApplication());
+$app = Application::getInstance($container, new ConsoleApplication(), $config);
 $app->run();

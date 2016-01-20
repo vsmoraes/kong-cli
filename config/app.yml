@@ -1,5 +1,5 @@
 kong:
-    host: kong.dev
+    host: kong.dev:8001
 
 commands:
     - \Dafiti\Kong\Command\ListApis
