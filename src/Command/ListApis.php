@@ -9,6 +9,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ListApis extends Command
 {
+    const NAME = 'api:list';
+    const DESCRIPTION = 'List apis registered on kong';
+
     /**
      * @var KongClient
      */
@@ -21,10 +24,13 @@ class ListApis extends Command
         parent::__construct();
     }
 
+    /**
+     * Configure command
+     */
     public function configure()
     {
-        $this->setName('list-apis')
-            ->setDescription('List apis registered on kong');
+        $this->setName(static::NAME)
+            ->setDescription(static::DESCRIPTION);
     }
 
     /**

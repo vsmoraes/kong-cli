@@ -35,6 +35,7 @@ class Application
     /**
      * @param ContainerInterface|null $container
      * @param console|null $console
+     * @param array $config
      * @return Application
      */
     public static function getInstance(
@@ -48,6 +49,14 @@ class Application
         }
 
         return static::$instance;
+    }
+
+    /**
+     * Destroy instance
+     */
+    public static function destroyInstance()
+    {
+        static::$instance = null;
     }
 
     /**

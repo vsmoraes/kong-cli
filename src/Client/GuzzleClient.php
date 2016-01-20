@@ -12,16 +12,22 @@ class GuzzleClient implements KongClient
      */
     private $guzzle;
 
-    public function __construct(ClientInterface $guzzle)
+    /**
+     * @var array
+     */
+    private $config;
+
+    public function __construct(ClientInterface $guzzle, Application $application)
     {
         $this->guzzle = $guzzle;
+        $this->config = $application->config('kong');
     }
 
     /**
      * @param $method
      * @param $uri
      * @param array $options
-     * @return mixed
+     * @return array
      */
     public function request($method, $uri, array $options = [])
     {
@@ -35,8 +41,6 @@ class GuzzleClient implements KongClient
      */
     protected function buildUri($endpoint)
     {
-        $conf = Application::getInstance()->config('kong');
-
-        return $conf['host'] . $endpoint;
+        return $this->config['host'] . $endpoint;
     }
 }

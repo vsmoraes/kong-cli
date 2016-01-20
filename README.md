@@ -11,19 +11,12 @@
 A simple wrapper for the Kong API Manager using PHP
 
 ## Instalation
-The package is available on [Packagist](http://packagist.org/packages/dafiti/kong-cli).
-Autoloading is [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) compatible.
+The package is a standalone client but it requires [Composer](https://getcomposer.org/download/) to resolve the dependencies and handle autoloading.
 
-```composer require dafiti/kong-cli```
+Assuming you already have [Composer](https://getcomposer.org/download/) installed, run:
 
-Or add it directly to you `composer.json` file
-
-```json
-{
-    "require": {
-        "dafiti/kong-cli": "dev-master"
-    }
-}
+```bash
+composer install --prefer-dist --no-dev
 ```
 
 ## Usage
@@ -34,7 +27,7 @@ Or add it directly to you `composer.json` file
 
 ### Available commands
 
-* `api-list` :: list all registered apis
+* `api:list` :: list all registered apis
 
 ## License
 
