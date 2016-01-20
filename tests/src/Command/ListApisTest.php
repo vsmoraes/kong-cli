@@ -7,18 +7,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class ListApisTest extends \PHPUnit_Framework_TestCase
 {
-    public function testShouldConfigureCommand()
-    {
-        $kongClientMock = $this->getMockBuilder(KongClient::class)
-            ->getMockForAbstractClass();
-
-        $command = new ListApis($kongClientMock);
-        $command->configure();
-
-        $this->assertEquals(ListApis::NAME, $command->getName());
-        $this->assertEquals(ListApis::DESCRIPTION, $command->getDescription());
-    }
-
     public function testShouldListApisAndDisplayOnTable()
     {
         $response = [
@@ -48,11 +36,11 @@ class ListApisTest extends \PHPUnit_Framework_TestCase
         $commandTester->execute(['command' => $command->getName()]);
 
         $expected = <<<EOF
-+---+----------------+---------+---------+
-| # | URL            | Name    | Host    |
-+---+----------------+---------+---------+
-| 1 | http://foo.bar | Foo bar | foo.bar |
-+---+----------------+---------+---------+
++----+----------------+---------+--------------+
+| id | upstream_url   | name    | request_host |
++----+----------------+---------+--------------+
+| 1  | http://foo.bar | Foo bar | foo.bar      |
++----+----------------+---------+--------------+
 
 EOF;
 

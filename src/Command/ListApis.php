@@ -39,21 +39,23 @@ class ListApis extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $apis = $this->client->request('GET', '/apis/');
+        $response = $this->client->request('GET', '/apis/');
 
-        $tableRows = array_map(function ($api) {
-            return [
-                $api['id'],
-                $api['upstream_url'],
-                $api['name'],
-                $api['request_host']
-            ];
-        }, $apis['data']);
+        $headers = [];
+        $rows = [];
+
+        foreach ($response['data'] as $api) {
+            if (empty($headers)) {
+                $headers = array_keys($api);
+            }
+
+            $rows[] = array_values($api);
+        }
 
         $table = new Table($output);
-        $table->setHeaders(['#', 'URL', 'Name', 'Host'])
-            ->setRows($tableRows);
 
-        $table->render();
+        $table->setHeaders($headers)
+            ->setRows($rows)
+            ->render();
     }
 }

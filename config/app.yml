@@ -3,3 +3,6 @@ kong:
 
 commands:
     - \Dafiti\Kong\Command\ListApis
+    - \Dafiti\Kong\Command\CreateApi
+    - \Dafiti\Kong\Command\DeleteApi
+    - \Dafiti\Kong\Command\UpdateApi

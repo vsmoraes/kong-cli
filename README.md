@@ -28,6 +28,8 @@ composer install --prefer-dist --no-dev
 ### Available commands
 
 * `api:list` :: list all registered apis
+* `api:add <name> <request_host> <request_path> <upstream_url>` :: add a new api
+* `api:delete <name or id>` :: delete api
 
 ## License
 
