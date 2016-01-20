@@ -1,0 +1,13 @@
+cassandra:
+    image: mashape/cassandra
+
+kong:
+    image: mashape/kong
+    container_name: dafiti_kong
+    environment:
+        - VIRTUAL_HOST=kong.dev
+    links:
+        - cassandra
+    ports:
+        - "8000:8000"
+        - "8001:8001"
